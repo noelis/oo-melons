@@ -22,7 +22,7 @@ class AbstractMelonOrder(object):
         return base_price
 
     def get_total(self):
-        base_price = AbstractMelonOrder.get_base_price(self)
+        base_price = self.get_base_price()
         if self.species.lower() == "christmas":
             base_price = base_price * 1.5
         if self.order_type == "international" and self.qty < 10:
