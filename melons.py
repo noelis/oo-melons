@@ -37,3 +37,11 @@ class InternationalMelonOrder(AbstractMelonOrder):
     def __init__(self, species, qty, country_code):
         super(InternationalMelonOrder, self).__init__(species, qty, country_code, 
             "international", 0.17)
+
+class GovernmentMelonOrder(AbstractMelonOrder):
+    def __init__(self, species, qty):
+        super(GovernmentMelonOrder, self).__init__(species, qty, "USA", "domestic", 0.08)
+        self.passed_inspection = False
+
+    def mark_inspection(self, passed):
+        self.passed_inspection = passed
