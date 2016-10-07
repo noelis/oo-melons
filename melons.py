@@ -1,3 +1,4 @@
+from random import randint
 """This file should have our order classes in it."""
 
 class AbstractMelonOrder(object):
@@ -16,13 +17,14 @@ class AbstractMelonOrder(object):
 
         self.shipped = True
 
-    def get_total(self):
+    def get_base_price(self):
+        base_price = randint(5, 10)
+        return base_price
 
-        # base_price = 7.5 if self.species.lower() == 'christmas' else 5
+    def get_total(self):
+        base_price = AbstractMelonOrder.get_base_price(self)
         if self.species.lower() == "christmas":
-            base_price = 7.5
-        else:
-            base_price = 5
+            base_price = base_price * 1.5
         if self.order_type == "international" and self.qty < 10:
             total = ((1 + self.tax) * self.qty * base_price) + 3
         else:
