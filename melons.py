@@ -16,22 +16,16 @@ class AbstractMelonOrder(object):
 
         self.shipped = True
 
-class DomesticMelonOrder(AbstractMelonOrder):
-    def __init__(self, species, qty):
-        super(DomesticMelonOrder, self).__init__(species, qty, "USA", "domestic", 0.08)
-
     def get_total(self):
         base_price = 5
         total = (1 + self.tax) * self.qty * base_price
         return total
+
+class DomesticMelonOrder(AbstractMelonOrder):
+    def __init__(self, species, qty):
+        super(DomesticMelonOrder, self).__init__(species, qty, "USA", "domestic", 0.08)
 
 class InternationalMelonOrder(AbstractMelonOrder):
     def __init__(self, species, qty, country_code):
         super(InternationalMelonOrder, self).__init__(species, qty, country_code, 
             "international", 0.17)
-
-    def get_total(self):
-        base_price = 5
-        total = (1 + self.tax) * self.qty * base_price
-        return total
-       
