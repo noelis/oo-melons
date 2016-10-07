@@ -17,8 +17,16 @@ class AbstractMelonOrder(object):
         self.shipped = True
 
     def get_total(self):
-        base_price = 5
-        total = (1 + self.tax) * self.qty * base_price
+
+        # base_price = 7.5 if self.species.lower() == 'christmas' else 5
+        if self.species.lower() == "christmas":
+            base_price = 7.5
+        else:
+            base_price = 5
+        if self.order_type == "international" and self.qty < 10:
+            total = ((1 + self.tax) * self.qty * base_price) + 3
+        else:
+            total = (1 + self.tax) * self.qty * base_price
         return total
 
 class DomesticMelonOrder(AbstractMelonOrder):
